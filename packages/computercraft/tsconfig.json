@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "outDir": "dist",
+        "module": "commonjs",
+        "sourceMap": true,
+        "lib": [
+            "esnext",
+        ],
+        "strict": true,
+        "moduleResolution": "node",
+        "types": [
+            "@types/node",
+        ]
+    },
+    "exclude": [
+        "dist/*"
+    ],
+    "tstl": {
+        "luaTarget": "JIT"
+    }
+}
