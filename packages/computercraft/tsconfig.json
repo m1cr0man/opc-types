@@ -13,8 +13,8 @@
             "@types/node",
         ]
     },
-    "exclude": [
-        "dist/*"
+    "include": [
+        "json2dts.ts"
     ],
     "tstl": {
         "luaTarget": "JIT"

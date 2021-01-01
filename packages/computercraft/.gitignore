@@ -3,3 +3,4 @@ dist/
 *.js
 output.d.ts
 .vscode/
+package-lock.json

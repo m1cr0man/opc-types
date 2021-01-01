@@ -24,126 +24,12 @@ const COLOR_MAP = <{ [K: string]: number }>{
     black: 32768,
 }
 
-const KEYS_MAP = <typeof COLOR_MAP>{
-    space: 32,
-    apostrophe: 39,
-    comma: 44,
-    minus: 45,
-    period: 46,
-    slash: 47,
-    zero: 48,
-    one: 49,
-    two: 50,
-    three: 51,
-    four: 52,
-    five: 53,
-    six: 54,
-    seven: 55,
-    eight: 56,
-    nine: 57,
-    semiColon: 59,
-    equals: 61,
-    a: 65,
-    b: 66,
-    c: 67,
-    d: 68,
-    e: 69,
-    f: 70,
-    g: 71,
-    h: 72,
-    i: 73,
-    j: 74,
-    k: 75,
-    l: 76,
-    m: 77,
-    n: 78,
-    o: 79,
-    p: 80,
-    q: 81,
-    r: 82,
-    s: 83,
-    t: 84,
-    u: 85,
-    v: 86,
-    w: 87,
-    x: 88,
-    y: 89,
-    z: 90,
-    leftBracket: 91,
-    backslash: 92,
-    rightBracket: 93,
-    grave: 96,
-    enter: 257,
-    tab: 258,
-    backspace: 259,
-    insert: 260,
-    // "delete": 261,
-    right: 262,
-    left: 263,
-    down: 264,
-    up: 265,
-    pageUp: 266,
-    pageDown: 267,
-    home: 268,
-    end: 269,
-    capsLock: 280,
-    scrollLock: 281,
-    numLock: 282,
-    pause: 284,
-    f1: 290,
-    f2: 291,
-    f3: 292,
-    f4: 293,
-    f5: 294,
-    f6: 295,
-    f7: 296,
-    f8: 297,
-    f9: 298,
-    f10: 299,
-    f11: 300,
-    f12: 301,
-    f13: 302,
-    f14: 303,
-    f15: 304,
-    f16: 305,
-    f17: 306,
-    f18: 307,
-    f19: 308,
-    f20: 309,
-    f21: 310,
-    f22: 311,
-    f23: 312,
-    f24: 313,
-    f25: 314,
-    numPad0: 320,
-    numPad1: 321,
-    numPad2: 322,
-    numPad3: 323,
-    numPad4: 324,
-    numPad5: 325,
-    numPad6: 326,
-    numPad7: 327,
-    numPad8: 328,
-    numPad9: 329,
-    numPadDecimal: 330,
-    numPadDivide: 331,
-    numPadSubtract: 333,
-    numPadAdd: 334,
-    numPadEnter: 335,
-    numPadEqual: 336,
-    leftShift: 340,
-    leftCtrl: 341,
-    leftAlt: 342,
-    rightShift: 344,
-    rightCtrl: 345,
-    rightAlt: 346
-}
-
 const SKIPPED = [
     "vector",
     "table",
     "math",
     "string",
+    "keys",
     "coroutine",
 ]
 
@@ -192,6 +78,8 @@ class CCSpecial implements Typescriptable {
             'import "lua-types/5.2";',
             "type Color = number;",
             "type Table = {[K in string | number]: any};",
+            "/** @vararg */",
+            "interface LuaVarArgs<T> extends Array<T> {}",
         ]
     }
 }
@@ -220,7 +108,7 @@ class CCArgument {
 
         if (this.name == "...") {
             this.name = "...args"
-            this.type = `(${this.type})[]`
+            this.type = `LuaVarArgs<${this.type}>`
         }
 
         // Keywords
@@ -246,8 +134,6 @@ class CCConstant implements Typescriptable {
     ) {
         if (this.type == "color") {
             this.value = COLOR_MAP[this.name]
-        } else if (KEYS_MAP[name] !== undefined) {
-            this.value = KEYS_MAP[name]
         }
 
         this.type = mapType(type, true)
@@ -299,13 +185,18 @@ class CCFunction implements Typescriptable {
     toTypescript(): string[] {
         const args = this.args.map(arg => `${arg.name}: ${arg.type}`).join(", ")
         const argComments = this.args.map(arg => ` * @param ${arg.name.replace("?", "")} - ${arg.description}`)
+        const tupleReturn = []
+        if (this.returnType.includes(",")) tupleReturn.push(
+            ` * @tupleReturn`
+        )
         return [
             `/**`,
             ` * ${this.description}`,
             ` * `,
             ...argComments,
+            ...tupleReturn,
             `*/`,
-            `${this.topLevel && "declare " || ""}function ${this.name}(${args}): ${this.returnType};`,
+            `${this.topLevel && "declare " || "export "}function ${this.name}(${args}): ${this.returnType};`,
         ]
     }
 }
@@ -315,14 +206,7 @@ class CCLibrary implements Typescriptable {
         public name: string,
         public description: string,
         public properties: (CCConstant | CCFunction)[],
-    ) {
-        if (this.name == "keys")
-            this.properties.push(...Object.keys(KEYS_MAP).map(key => new CCConstant(
-                key,
-                "",
-                "number"
-            )))
-    }
+    ) { }
 
     static mapProperty(prop: JSONData): (CCConstant | CCFunction) {
         if (prop.type == "function") return CCFunction.fromJSON(prop)
