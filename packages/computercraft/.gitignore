@@ -1,6 +1,5 @@
 node_modules/
 dist/
 *.js
-output.d.ts
 .vscode/
 package-lock.json
