@@ -61,10 +61,10 @@ function mapType(type: string, first?: boolean): string {
         return `MultiReturn<[${type.split(",").map(t => mapType(t.trim())).join(", ")}]>`
     }
     if (type[0] == "[") {
-        type = mapType(type.slice(1, -1).trim()) + " | null"
+        type = mapType(type.slice(1, -1).trim()) + " | undefined"
     }
 
-    if (type == "nil") return "null"
+    if (type == "nil") return "undefined"
     return type
 }
 
@@ -75,7 +75,8 @@ interface Typescriptable {
 class CCSpecial implements Typescriptable {
     toTypescript(): string[] {
         return [
-            'import "lua-types/5.2";',
+            '/// <reference types="lua-types/5.1" />',
+            '/// <reference types="typescript-to-lua/language-extensions" />',
             "type Color = number;",
             "type Table = {[K in string | number]: any};",
             "/** @vararg */",

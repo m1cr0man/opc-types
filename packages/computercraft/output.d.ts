@@ -9,7 +9,7 @@ interface LuaVarArgs<T> extends Array<T> { }
  *
  * @param time - The number of seconds to sleep
 */
-declare function sleep(time: number): null;
+declare function sleep(time: number): undefined;
 /**
  * Bit manipulation API
  *
@@ -369,26 +369,26 @@ declare module "disk" {
      *
      * @param side - The side to check
     */
-    export function getMountPath(side: string): string | null;
+    export function getMountPath(side: string): string | undefined;
     /**
      * Sets the label of a disk.
      *
      * @param side - The side to check
      * @param label - The name of the disk
     */
-    export function setLabel(side: string, label: string): null;
+    export function setLabel(side: string, label: string): undefined;
     /**
      * Returns the label of a floppy disk.
      *
      * @param side - The side to check
     */
-    export function getLabel(side: string): string | null;
+    export function getLabel(side: string): string | undefined;
     /**
      * Returns the ID of a disk.
      *
      * @param side - The side to check
     */
-    export function getID(side: string): number | null;
+    export function getID(side: string): number | undefined;
     /**
      * Returns whether a music disc is in the drive.
      *
@@ -400,25 +400,25 @@ declare module "disk" {
      *
      * @param side - The side to check
     */
-    export function getAudioTitle(side: string): string | null;
+    export function getAudioTitle(side: string): string | undefined;
     /**
      * Plays the music disc in the drive.
      *
      * @param side - The side to check
     */
-    export function playAudio(side: string): null;
+    export function playAudio(side: string): undefined;
     /**
      * Stops the music disc in the drive.
      *
      * @param side - The side to check
     */
-    export function stopAudio(side: string): null;
+    export function stopAudio(side: string): undefined;
     /**
      * Ejects the object from the drive.
      *
      * @param side - The side to check
     */
-    export function eject(side: string): null;
+    export function eject(side: string): undefined;
 }
 /**
  * Allows performing operations on files and directories.
@@ -462,7 +462,7 @@ declare module "fs" {
      *
      * @param path - The path to query
     */
-    export function getDrive(path: string): string | null;
+    export function getDrive(path: string): string | undefined;
     /**
      * Returns the size of a file in bytes.
      *
@@ -480,21 +480,21 @@ declare module "fs" {
      *
      * @param path - The path to create
     */
-    export function makeDir(path: string): null;
+    export function makeDir(path: string): undefined;
     /**
      * Moves a file or directory to a new location.
      *
      * @param fromPath - The source path
      * @param toPath - The destination path
     */
-    export function move(fromPath: string, toPath: string): null;
+    export function move(fromPath: string, toPath: string): undefined;
     /**
      * Copies a file or directory to a new location.
      *
      * @param fromPath - The source path
      * @param toPath - The destination path
     */
-    export function copy(fromPath: string, toPath: string): null;
+    export function copy(fromPath: string, toPath: string): undefined;
     /**
      * Combines two path components, so that the second path is nested inside the first.
      *
@@ -562,7 +562,7 @@ declare module "gps" {
      * @param timeout - The maximim amount of time to wait for a response, defaults to 2
      * @param debug - Whether to print debug messages (optional)
     */
-    export function locate(timeout?: number, debug?: boolean): (MultiReturn<[number, number, number]>) | null;
+    export function locate(timeout?: number, debug?: boolean): (MultiReturn<[number, number, number]>) | undefined;
 }
 /**
  * Provides functions for viewing help documents.
@@ -581,13 +581,13 @@ declare module "help" {
      *
      * @param path - The paths to search for help topics, separated by colons
     */
-    export function setPath(path: string): null;
+    export function setPath(path: string): undefined;
     /**
      * Returns the path to the file containing a help topic.
      *
      * @param topic - The topic to search for
     */
-    export function lookup(topic: string): string | null;
+    export function lookup(topic: string): string | undefined;
     /**
      * Returns a list of help topics available.
      *
@@ -616,7 +616,7 @@ declare module "http" {
      * @param binary - Whether to send a binary request (optional) (CC 1.8+)
      * @param redirect - Whether to automatically redirect on HTTP 300 responses (optional) (CC 1.8+)
     */
-    export function request(url: string, postData?: string, headers?: Table, binary?: boolean, redirect?: boolean): null;
+    export function request(url: string, postData?: string, headers?: Table, binary?: boolean, redirect?: boolean): undefined;
     /**
      * Synchronously sends an HTTP GET request, and returns a file handle.
      *
@@ -625,7 +625,7 @@ declare module "http" {
      * @param binary - Whether to send a binary request (optional) (CC 1.8+)
      * @param redirect - Whether to automatically redirect on HTTP 300 responses (optional) (CC 1.8+)
     */
-    export function get(url: string, headers?: Table, binary?: boolean, redirect?: boolean): Table | MultiReturn<[null, string, Table | null]>;
+    export function get(url: string, headers?: Table, binary?: boolean, redirect?: boolean): Table | MultiReturn<[undefined, string, Table | undefined]>;
     /**
      * Synchronously sends an HTTP POST request, and returns a file handle.
      *
@@ -635,33 +635,33 @@ declare module "http" {
      * @param binary - Whether to send a binary request (optional) (CC 1.8+)
      * @param redirect - Whether to automatically redirect on HTTP 300 responses (optional) (CC 1.8+)
     */
-    export function post(url: string, postData: string, headers?: Table, binary?: boolean, redirect?: boolean): Table | MultiReturn<[null, string, Table | null]>;
+    export function post(url: string, postData: string, headers?: Table, binary?: boolean, redirect?: boolean): Table | MultiReturn<[undefined, string, Table | undefined]>;
     /**
      * Checks if a URL is valid and in the whitelist.
      *
      * @param url - The URL to check
     */
-    export function checkURL(url: string): MultiReturn<[boolean, string | null]>;
+    export function checkURL(url: string): MultiReturn<[boolean, string | undefined]>;
     /**
      * Asynchronously hecks if a URL is valid and in the whitelist.
      *
      * @param url - The URL to check
     */
-    export function checkURLAsync(url: string): null;
+    export function checkURLAsync(url: string): undefined;
     /**
      * Opens a websocket. (CC:T)
      *
      * @param url - The URL to connect to
      * @param headers - Any headers to send in the HTTP request
     */
-    export function websocket(url: string, headers?: Table): Table | MultiReturn<[null, string]>;
+    export function websocket(url: string, headers?: Table): Table | MultiReturn<[undefined, string]>;
     /**
      * Asynchronously opens a websocket. (CC:T)
      *
      * @param url - The URL to connect to
      * @param headers - Any headers to send in the HTTP request
     */
-    export function websocketAsync(url: string, headers?: Table): null;
+    export function websocketAsync(url: string, headers?: Table): undefined;
 }
 /**
  * Default Lua IO API
@@ -675,18 +675,18 @@ declare module "io" {
      *
      * @param file - The file to operate on (nil for default output file)
     */
-    export function close(file?: Table): null;
+    export function close(file?: Table): undefined;
     /**
      * Flushes the current output file.
      *
     */
-    export function flush(): null;
+    export function flush(): undefined;
     /**
      * Either opens a filename and sets the default input file handle, sets the defualt input handle to the handle passed in, or returns the current input handle.
      *
      * @param file - The file name or file handle to operate on, or nil to return the input file
     */
-    export function input(file?: string | Table): Table | null;
+    export function input(file?: string | Table): Table | undefined;
     /**
      * Returns an iterator function that returns each line in a file.
      *
@@ -699,31 +699,31 @@ declare module "io" {
      * @param filename - The file to open
      * @param mode - The mode to open the file in (r/w/a) (optional)
     */
-    export function open(filename: string, mode?: string): Table | (MultiReturn<[null, string]>);
+    export function open(filename: string, mode?: string): Table | (MultiReturn<[undefined, string]>);
     /**
      * Either opens a filename and sets the default output file handle, sets the defualt output handle to the handle passed in, or returns the current output handle.
      *
      * @param file - The file name or file handle to operate on, or nil to return the output file
     */
-    export function output(file?: string | Table): Table | null;
+    export function output(file?: string | Table): Table | undefined;
     /**
      * Reads the next line from the input file.
      *
      * @param ...args - *l for each line that will be read
     */
-    export function read(...args: LuaVarArgs<string>): string | null[];
+    export function read(...args: LuaVarArgs<string>): string | undefined[];
     /**
      * Returns "file" if obj is an open file, "closed file" if obj is a closed file, or nil.
      *
      * @param obj - The object to check
     */
-    export function type(obj: any): string | null;
+    export function type(obj: any): string | undefined;
     /**
      * Writes a string or number to the default output.
      *
      * @param str - The string or number to write
     */
-    export function write(str: string | number): null;
+    export function write(str: string | number): undefined;
 }
 /**
  * Allows running multiple terminal sessions at once. (1.6+) (Advanced only)
@@ -762,7 +762,7 @@ declare module "multishell" {
      * @param tabID - The ID of the tab
      * @param title - The new name of the tab
     */
-    export function setTitle(tabID: number, title: string): null;
+    export function setTitle(tabID: number, title: string): undefined;
     /**
      * Returns the title of a tab.
      *
@@ -796,13 +796,13 @@ declare module "os" {
      * Returns the label of the computer.
      *
     */
-    export function getComputerLabel(): string | null;
+    export function getComputerLabel(): string | undefined;
     /**
      * Sets the label of the computer.
      *
      * @param label - The new label or nil
     */
-    export function setComputerLabel(label: string | null): null;
+    export function setComputerLabel(label: string | undefined): undefined;
     /**
      * Runs a Lua script with the specified environment.
      *
@@ -822,7 +822,7 @@ declare module "os" {
      *
      * @param name - The name of the API
     */
-    export function unloadAPI(name: string): null;
+    export function unloadAPI(name: string): undefined;
     /**
      * Waits for an event to occur.
      *
@@ -841,7 +841,7 @@ declare module "os" {
      * @param event - The event to queue
      * @param ...args - Any parameters to pass in the event
     */
-    export function queueEvent(event: string, ...args: LuaVarArgs<any>): null;
+    export function queueEvent(event: string, ...args: LuaVarArgs<any>): undefined;
     /**
      * Returns the amount of time since the computer was started.
      *
@@ -858,7 +858,7 @@ declare module "os" {
      *
      * @param timerID - The ID of the timer
     */
-    export function cancelTimer(timerID: number): null;
+    export function cancelTimer(timerID: number): undefined;
     /**
      * Returns the current time in the selected locale.
      *
@@ -877,7 +877,7 @@ declare module "os" {
      *
      * @param time - The number of seconds to sleep
     */
-    export function sleep(time: number): null;
+    export function sleep(time: number): undefined;
     /**
      * Returns the current day for the selected locale.
      *
@@ -901,17 +901,17 @@ declare module "os" {
      *
      * @param alarmID - The ID of the alarm
     */
-    export function cancelAlarm(alarmID: number): null;
+    export function cancelAlarm(alarmID: number): undefined;
     /**
      * Powers off the computer.
      *
     */
-    export function shutdown(): null;
+    export function shutdown(): undefined;
     /**
      * Reboots the computer.
      *
     */
-    export function reboot(): null;
+    export function reboot(): undefined;
 }
 /**
  * Allows drawing on the screen.
@@ -933,7 +933,7 @@ declare module "paintutils" {
      * @param x - The X coordinate
      * @param y - The Y coordinate
     */
-    export function drawImage(image: Table, x: number, y: number): null;
+    export function drawImage(image: Table, x: number, y: number): undefined;
     /**
      * Draws a pixel on the screen.
      *
@@ -941,7 +941,7 @@ declare module "paintutils" {
      * @param y - The Y coordinate
      * @param color - The color to paint with
     */
-    export function drawPixel(x: number, y: number, color?: Color): null;
+    export function drawPixel(x: number, y: number, color?: Color): undefined;
     /**
      * Draws a line on the screen.
      *
@@ -951,7 +951,7 @@ declare module "paintutils" {
      * @param endY - The second Y coordinate
      * @param color - The color to paint with
     */
-    export function drawLine(startX: number, startY: number, endX: number, endY: number, color?: Color): null;
+    export function drawLine(startX: number, startY: number, endX: number, endY: number, color?: Color): undefined;
     /**
      * Draws a box on the screen. (1.64+)
      *
@@ -961,7 +961,7 @@ declare module "paintutils" {
      * @param endY - The second Y coordinate
      * @param color - The color to paint with
     */
-    export function drawBox(startX: number, startY: number, endX: number, endY: number, color?: Color): null;
+    export function drawBox(startX: number, startY: number, endX: number, endY: number, color?: Color): undefined;
     /**
      * Draws a filled box on the screen. (1.64+)
      *
@@ -971,7 +971,7 @@ declare module "paintutils" {
      * @param endY - The second Y coordinate
      * @param color - The color to paint with
     */
-    export function drawFilledBox(startX: number, startY: number, endX: number, endY: number, color?: Color): null;
+    export function drawFilledBox(startX: number, startY: number, endX: number, endY: number, color?: Color): undefined;
 }
 /**
  * Allows easier multitasking
@@ -995,7 +995,7 @@ declare module "parallel" {
      * @param func2 - The second function
      * @param ...args - Any other functions
     */
-    export function waitForAll(func1: ((...args: any[]) => any), func2: ((...args: any[]) => any), ...args: LuaVarArgs<((...args: any[]) => any)>): null;
+    export function waitForAll(func1: ((...args: any[]) => any), func2: ((...args: any[]) => any), ...args: LuaVarArgs<((...args: any[]) => any)>): undefined;
 }
 /**
  * Interacts with peripherals.
@@ -1015,19 +1015,19 @@ declare module "peripheral" {
      *
      * @param side - The side or wrapped peripheral to check
     */
-    export function getType(side: string | Table): string | null;
+    export function getType(side: string | Table): string | undefined;
     /**
      * Returns a list of methods that the peripheral has.
      *
      * @param side - The side to check
     */
-    export function getMethods(side: string): Table | null;
+    export function getMethods(side: string): Table | undefined;
     /**
      * Returns the side a wrapped peripheral is on. (CC:1 1.88+)
      *
      * @param peripheral - The peripheral to check
     */
-    export function getName(peripheral: Table): string | null;
+    export function getName(peripheral: Table): string | undefined;
     /**
      * Calls a method on a peripheral.
      *
@@ -1041,14 +1041,14 @@ declare module "peripheral" {
      *
      * @param side - The side to check
     */
-    export function wrap(side: string): Table | null;
+    export function wrap(side: string): Table | undefined;
     /**
      * Finds peripherals of a type and returns their tables of methods. (1.6+)
      *
      * @param type - The type of peripheral to find
      * @param fnFilter - A function that filters through the entries
     */
-    export function find(type: string, fnFilter?: ((...args: any[]) => any)): Table | null;
+    export function find(type: string, fnFilter?: ((...args: any[]) => any)): Table | undefined;
     /**
      * Returns a list of names of connected peripherals.
      *
@@ -1067,13 +1067,13 @@ declare module "rednet" {
      *
      * @param side - The side to open
     */
-    export function open(side: string): null;
+    export function open(side: string): undefined;
     /**
      * Closes a side for transcieving.
      *
      * @param side - The side to close
     */
-    export function close(side: string): null;
+    export function close(side: string): undefined;
     /**
      * Sends a message to a computer.
      *
@@ -1081,14 +1081,14 @@ declare module "rednet" {
      * @param message - The message to send
      * @param protocol - The protocol to use (1.6+)
     */
-    export function send(recieverID: string, message: any, protocol?: string): null;
+    export function send(recieverID: string, message: any, protocol?: string): undefined;
     /**
      * Sends a message to all computers.
      *
      * @param message - The message to send
      * @param protocol - The protocol to use (1.6+)
     */
-    export function broadcast(message: any, protocol?: string): null;
+    export function broadcast(message: any, protocol?: string): undefined;
     /**
      * Waits for a message to be received, then returns the received message.
      *
@@ -1108,21 +1108,21 @@ declare module "rednet" {
      * @param protocol - The protocol to use
      * @param hostname - The hostname to use
     */
-    export function host(protocol: string, hostname: string): null;
+    export function host(protocol: string, hostname: string): undefined;
     /**
      * Removes a hostname for a protocol for rednet.lookup(). (1.6+)
      *
      * @param protocol - The protocol to use
      * @param hostname - The hostname to use
     */
-    export function unhost(protocol: string, hostname: string): null;
+    export function unhost(protocol: string, hostname: string): undefined;
     /**
      * Searches for a hostname or a protocol. (1.6+)
      *
      * @param protocol - The protocol to use
      * @param hostname - The hostname to use (optional)
     */
-    export function lookup(protocol: string, hostname?: string): null;
+    export function lookup(protocol: string, hostname?: string): undefined;
 }
 /**
  * Controls redstone inputs and outputs.
@@ -1148,7 +1148,7 @@ declare module "redstone" {
      * @param side - The side to check
      * @param value - The value to set
     */
-    export function setOutput(side: string, value: boolean): null;
+    export function setOutput(side: string, value: boolean): undefined;
     /**
      * Returns the digital value of the redstone that's being output on a side.
      *
@@ -1167,7 +1167,7 @@ declare module "redstone" {
      * @param side - The side to check
      * @param value - The value to set
     */
-    export function setAnalogOutput(side: string, value: number): null;
+    export function setAnalogOutput(side: string, value: number): undefined;
     /**
      * Returns the analog value of the redstone that's being output on a side. (1.51+)
      *
@@ -1186,7 +1186,7 @@ declare module "redstone" {
      * @param side - The side to check
      * @param colors - The value to set as a bitmask of colors
     */
-    export function setBundledOutput(side: string, colors: number): null;
+    export function setBundledOutput(side: string, colors: number): undefined;
     /**
      * Returns the value of the bundled redstone that's being output on a side.
      *
@@ -1225,7 +1225,7 @@ declare module "rs" {
      * @param side - The side to check
      * @param value - The value to set
     */
-    export function setOutput(side: string, value: boolean): null;
+    export function setOutput(side: string, value: boolean): undefined;
     /**
      * Returns the digital value of the redstone that's being output on a side.
      *
@@ -1244,7 +1244,7 @@ declare module "rs" {
      * @param side - The side to check
      * @param value - The value to set
     */
-    export function setAnalogOutput(side: string, value: number): null;
+    export function setAnalogOutput(side: string, value: number): undefined;
     /**
      * Returns the analog value of the redstone that's being output on a side. (1.51+)
      *
@@ -1263,7 +1263,7 @@ declare module "rs" {
      * @param side - The side to check
      * @param colors - The value to set as a bitmask of colors
     */
-    export function setBundledOutput(side: string, colors: number): null;
+    export function setBundledOutput(side: string, colors: number): undefined;
     /**
      * Returns the value of the bundled redstone that's being output on a side.
      *
@@ -1291,7 +1291,7 @@ declare module "settings" {
      * @param name - The key for the setting
      * @param value - The value for the setting
     */
-    export function set(name: string, value: any): null;
+    export function set(name: string, value: any): undefined;
     /**
      * Gets a setting from the current settings.
      *
@@ -1304,12 +1304,12 @@ declare module "settings" {
      *
      * @param name - The key for the setting
     */
-    export function unset(name: string): null;
+    export function unset(name: string): undefined;
     /**
      * Clears all settings.
      *
     */
-    export function clear(): null;
+    export function clear(): undefined;
     /**
      * Returns a list of keys.
      *
@@ -1320,32 +1320,32 @@ declare module "settings" {
      *
      * @param path - The file to access
     */
-    export function load(path: string): null;
+    export function load(path: string): undefined;
     /**
      * Saves settings to a file.
      *
      * @param path - The file to access
     */
-    export function save(path: string): null;
+    export function save(path: string): undefined;
     /**
      * Returns a table with details about a setting. (CC:t 1.87+)
      *
      * @param name - The name of the setting
     */
-    export function getDetails(name: string): Table | null;
+    export function getDetails(name: string): Table | undefined;
     /**
      * Defines a new setting, optionally specifying various properties about it. (CC:T 1.87+)
      *
      * @param name - The name of the setting to define
      * @param options - A table with any of the fields 'description', 'default', and 'type'.
     */
-    export function define(name: string, options?: Table): null;
+    export function define(name: string, options?: Table): undefined;
     /**
      * Removes a previously defined setting. (CC:T 1.87+)
      *
      * @param name - The name of the setting to undefine
     */
-    export function undefine(name: string): null;
+    export function undefine(name: string): undefined;
 }
 /**
  * Interacts with the CraftOS shell - not available to APIs.
@@ -1358,7 +1358,7 @@ declare module "shell" {
      * Exits the current shell.
      *
     */
-    export function exit(): null;
+    export function exit(): undefined;
     /**
      * Returns the current working directory.
      *
@@ -1369,7 +1369,7 @@ declare module "shell" {
      *
      * @param path - The directory to set
     */
-    export function setDir(path: string): null;
+    export function setDir(path: string): undefined;
     /**
      * Returns the current PATH.
      *
@@ -1380,7 +1380,7 @@ declare module "shell" {
      *
      * @param path - The PATH to set
     */
-    export function setPath(path: string): null;
+    export function setPath(path: string): undefined;
     /**
      * Resolves a local path to an absolute path.
      *
@@ -1404,13 +1404,13 @@ declare module "shell" {
      * @param alias - The name of the alias
      * @param program - The name of the program
     */
-    export function setAlias(alias: string, program: string): null;
+    export function setAlias(alias: string, program: string): undefined;
     /**
      * Removes an alias.
      *
      * @param alias - The name of the alias
     */
-    export function clearAlias(alias: string): null;
+    export function clearAlias(alias: string): undefined;
     /**
      * Returns a list of all programs in the working directory and PATH.
      *
@@ -1441,7 +1441,7 @@ declare module "shell" {
      *
      * @param tabID - The ID of the tab to switch to
     */
-    export function switchTab(tabID: number): null;
+    export function switchTab(tabID: number): undefined;
     /**
      * Returns a list of suffixes that could complete a prefix. (1.74+)
      *
@@ -1460,7 +1460,7 @@ declare module "shell" {
      * @param path - The path that this will be called on
      * @param completionFunction - The function to call
     */
-    export function setCompletionFunction(path: string, completionFunction: ((...args: any[]) => any)): null;
+    export function setCompletionFunction(path: string, completionFunction: ((...args: any[]) => any)): undefined;
     /**
      * Returns the table containing functions registered for shell.complete().
      *
@@ -1479,7 +1479,7 @@ declare module "term" {
      *
      * @param text - The text to write
     */
-    export function write(text: string): null;
+    export function write(text: string): undefined;
     /**
      * Writes text to the screen using specific colors.
      *
@@ -1487,17 +1487,17 @@ declare module "term" {
      * @param textColors - The colors of the text
      * @param backgroundColors - The colors of the background
     */
-    export function blit(text: string, textColors: string, backgroundColors: string): null;
+    export function blit(text: string, textColors: string, backgroundColors: string): undefined;
     /**
      * Clears the screen.
      *
     */
-    export function clear(): null;
+    export function clear(): undefined;
     /**
      * Clears the current line.
      *
     */
-    export function clearLine(): null;
+    export function clearLine(): undefined;
     /**
      * Returns the current position of the cursor.
      *
@@ -1509,13 +1509,13 @@ declare module "term" {
      * @param x - The X position
      * @param y - The Y position
     */
-    export function setCursorPos(x: number, y: number): null;
+    export function setCursorPos(x: number, y: number): undefined;
     /**
      * Sets whether the cursor should blink.
      *
      * @param bool - Whether to blink the cursor
     */
-    export function setCursorBlink(bool: boolean): null;
+    export function setCursorBlink(bool: boolean): undefined;
     /**
      * Returns whether the cursor blinks.
      *
@@ -1541,7 +1541,7 @@ declare module "term" {
      *
      * @param n - The number of lines to scroll
     */
-    export function scroll(n: number): null;
+    export function scroll(n: number): undefined;
     /**
      * Redirects the terminal output to another terminal.
      *
@@ -1563,25 +1563,25 @@ declare module "term" {
      *
      * @param color - The color to set
     */
-    export function setTextColor(color: Color): null;
+    export function setTextColor(color: Color): undefined;
     /**
      * Sets the current text colour.
      *
      * @param colour - The colour to set
     */
-    export function setTextColour(colour: Color): null;
+    export function setTextColour(colour: Color): undefined;
     /**
      * Sets the current background color.
      *
      * @param color - The color to set
     */
-    export function setBackgroundColor(color: Color): null;
+    export function setBackgroundColor(color: Color): undefined;
     /**
      * Sets the current background colour.
      *
      * @param colour - The colour to set
     */
-    export function setBackgroundColour(colour: Color): null;
+    export function setBackgroundColour(colour: Color): undefined;
     /**
      * Gets the current text color. (1.74+)
      *
@@ -1628,14 +1628,14 @@ declare module "textutils" {
      * @param text - The text to write
      * @param rate - The number of characters to write per second
     */
-    export function slowWrite(text: string, rate: number): null;
+    export function slowWrite(text: string, rate: number): undefined;
     /**
      * Writes text to the screen slowly, with a newline.
      *
      * @param text - The text to write
      * @param rate - The number of characters to write per second
     */
-    export function slowPrint(text: string, rate: number): null;
+    export function slowPrint(text: string, rate: number): undefined;
     /**
      * Returns a string representing a Minecraft time in either 12-hour or 24-hour time.
      *
@@ -1648,13 +1648,13 @@ declare module "textutils" {
      *
      * @param ...args - The rows to display or the color of the text
     */
-    export function tabulate(...args: LuaVarArgs<Table | Color>): null;
+    export function tabulate(...args: LuaVarArgs<Table | Color>): undefined;
     /**
      * Prints rows of values in an ordered form, changing the text color if one is encountered (paged).
      *
      * @param ...args - The rows to display or the color of the text
     */
-    export function tabulate(...args: LuaVarArgs<Table | Color>): null;
+    export function tabulate(...args: LuaVarArgs<Table | Color>): undefined;
     /**
      * Prints text, but waits to scroll if too much text is displayed.
      *
@@ -1758,22 +1758,22 @@ declare module "turtle" {
      * Try to move the turtle forward.
      *
     */
-    export function forward(): MultiReturn<[boolean, string | null]>;
+    export function forward(): MultiReturn<[boolean, string | undefined]>;
     /**
      * Try to move the turtle backward.
      *
     */
-    export function back(): MultiReturn<[boolean, string | null]>;
+    export function back(): MultiReturn<[boolean, string | undefined]>;
     /**
      * Try to move the turtle up.
      *
     */
-    export function up(): MultiReturn<[boolean, string | null]>;
+    export function up(): MultiReturn<[boolean, string | undefined]>;
     /**
      * Try to move the turtle down.
      *
     */
-    export function down(): MultiReturn<[boolean, string | null]>;
+    export function down(): MultiReturn<[boolean, string | undefined]>;
     /**
      * Turn the turtle left.
      *
@@ -1812,7 +1812,7 @@ declare module "turtle" {
      *
      * @param slotNum - 1 is top left, 16 (9 in 1.33 and earlier) is bottom right (optional)
     */
-    export function getItemDetail(slotNum?: number): Table | null;
+    export function getItemDetail(slotNum?: number): Table | undefined;
     /**
      * Attempts to equip an item in the current slot to the turtle's left side, switching the previously equipped item back into the inventory. (1.6+)
      *
@@ -1828,54 +1828,54 @@ declare module "turtle" {
      *
      * @param toolSide - left/right (optional)
     */
-    export function dig(toolSide?: string): MultiReturn<[boolean, string | null]>;
+    export function dig(toolSide?: string): MultiReturn<[boolean, string | undefined]>;
     /**
      * Breaks and sucks the block above.
      *
      * @param toolSide - left/right (optional)
     */
-    export function digUp(toolSide?: string): MultiReturn<[boolean, string | null]>;
+    export function digUp(toolSide?: string): MultiReturn<[boolean, string | undefined]>;
     /**
      * Breaks and sucks the block below. With hoe: tills the dirt beneath the space below it.
      *
      * @param toolSide - left/right (optional)
     */
-    export function digDown(toolSide?: string): MultiReturn<[boolean, string | null]>;
+    export function digDown(toolSide?: string): MultiReturn<[boolean, string | undefined]>;
     /**
      * Places a block of the selected slot in front. Engrave signText on signs if provided. Collects water or lava if the currently selected slot is an empty bucket. (1.4+)
      *
      * @param signText - If you're placing a sign and signText is given, then the turtle places the sign putting the text of signText into it. Each line of the sign can be separated using newline (
 ) character (optional)
     */
-    export function place(signText?: string): MultiReturn<[boolean, string | null]>;
+    export function place(signText?: string): MultiReturn<[boolean, string | undefined]>;
     /**
      * Places a block of the selected slot above. Collects water or lava if the currently selected slot is an empty bucket.
      *
     */
-    export function placeUp(): MultiReturn<[boolean, string | null]>;
+    export function placeUp(): MultiReturn<[boolean, string | undefined]>;
     /**
      * Places a block of the selected slot below. Collects water or lava if the currently selected slot is an empty bucket.
      *
     */
-    export function placeDown(): MultiReturn<[boolean, string | null]>;
+    export function placeDown(): MultiReturn<[boolean, string | undefined]>;
     /**
      * Attacks in front of the turtle. (1.4+)
      *
      * @param toolSide - left/right (optional)
     */
-    export function attack(toolSide?: string): MultiReturn<[boolean, string | null]>;
+    export function attack(toolSide?: string): MultiReturn<[boolean, string | undefined]>;
     /**
      * Attacks above the turtle. (1.4+)
      *
      * @param toolSide - left/right (optional)
     */
-    export function attackUp(toolSide?: string): MultiReturn<[boolean, string | null]>;
+    export function attackUp(toolSide?: string): MultiReturn<[boolean, string | undefined]>;
     /**
      * Attacks under the turtle. (1.4+)
      *
      * @param toolSide - left/right (optional)
     */
-    export function attackDown(toolSide?: string): MultiReturn<[boolean, string | null]>;
+    export function attackDown(toolSide?: string): MultiReturn<[boolean, string | undefined]>;
     /**
      * Detects if there is a block in front. Does not detect mobs.
      *
@@ -1933,31 +1933,31 @@ declare module "turtle" {
      * @param slotNum - 1 is top left, 16 (9 in 1.33 and earlier) is bottom right
      * @param quantity - Transfers [quantity] items from the selected slot to the specified slot (optional)
     */
-    export function transferTo(slotNum: number, quantity?: number): MultiReturn<[boolean, string | null]>;
+    export function transferTo(slotNum: number, quantity?: number): MultiReturn<[boolean, string | undefined]>;
     /**
      * Drops all items in the selected slot, or specified, drops [count] items.  /  [>= 1.4 only:] If there is a inventory on the side (i.e in front of the turtle) it will try to place into the inventory, returning false if the inventory is full.
      *
      * @param count - Drops [count] items (optional)
     */
-    export function drop(count?: number): MultiReturn<[boolean, string | null]>;
+    export function drop(count?: number): MultiReturn<[boolean, string | undefined]>;
     /**
      * Drops all items in the selected slot, or specified, drops [count] items.  /  [>= 1.4 only:] If there is a inventory on the side (i.e above the turtle) it will try to place into the inventory, returning false if the inventory is full. (1.4+)
      *
      * @param count - Drops [count] items (optional)
     */
-    export function dropUp(count?: number): MultiReturn<[boolean, string | null]>;
+    export function dropUp(count?: number): MultiReturn<[boolean, string | undefined]>;
     /**
      * Drops all items in the selected slot, or specified, drops [count] items.  /  [>= 1.4 only:] If there is a inventory on the side (i.e below the turtle) it will try to place into the inventory, returning false if the inventory is full. If above a furnace, will place item in the top slot. (1.4+)
      *
      * @param count - Drops [count] items (optional)
     */
-    export function dropDown(count?: number): MultiReturn<[boolean, string | null]>;
+    export function dropDown(count?: number): MultiReturn<[boolean, string | undefined]>;
     /**
      * Picks up an item stack of any number, from the ground or an inventory in front of the turtle, then places it in the selected slot. If the turtle can't pick up the item, the function returns false (1.4+). The [amount] parameter requires ComputerCraft 1.6 or later
      *
      * @param amount - The turtle will attempt to pick up at most the specified number of items (optional)
     */
-    export function suck(amount?: number): MultiReturn<[boolean, string | null]>;
+    export function suck(amount?: number): MultiReturn<[boolean, string | undefined]>;
     /**
      * Picks up an item stack of any number, from the ground or an inventory above the turtle, then places it in the selected slot. If the turtle can't pick up the item, the function returns false (1.4+). The [amount] parameter requires ComputerCraft 1.6 or later
      *
