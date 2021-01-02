@@ -58,7 +58,7 @@ function mapType(type: string, first?: boolean): string {
         return `(${mapType(type.slice(1, type.indexOf(")")))})`
     }
     if (type.indexOf(",") + 1) {
-        return `[${type.split(",").map(t => mapType(t.trim())).join(", ")}]`
+        return `MultiReturn<[${type.split(",").map(t => mapType(t.trim())).join(", ")}]>`
     }
     if (type[0] == "[") {
         type = mapType(type.slice(1, -1).trim()) + " | null"
@@ -185,16 +185,11 @@ class CCFunction implements Typescriptable {
     toTypescript(): string[] {
         const args = this.args.map(arg => `${arg.name}: ${arg.type}`).join(", ")
         const argComments = this.args.map(arg => ` * @param ${arg.name.replace("?", "")} - ${arg.description}`)
-        const tupleReturn = []
-        if (this.returnType.includes(",")) tupleReturn.push(
-            ` * @tupleReturn`
-        )
         return [
             `/**`,
             ` * ${this.description}`,
             ` * `,
             ...argComments,
-            ...tupleReturn,
             `*/`,
             `${this.topLevel && "declare " || "export "}function ${this.name}(${args}): ${this.returnType};`,
         ]

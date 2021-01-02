@@ -1,4 +1,5 @@
-/// <reference types="lua-types/5.2" />
+/// <reference types="lua-types/5.1" />
+/// <reference types="typescript-to-lua/language-extensions" />
 type Color = number;
 type Table = { [K in string | number]: any };
 /** @vararg */
@@ -107,9 +108,8 @@ declare module "colors" {
      * Separates a hexadecimal RGB color into its three constituent channels. (CC:T)
      *
      * @param rgb - The RGB hex value to unpack.
-     * @tupleReturn
     */
-    export function unpackRGB(rgb: number): [number, number, number];
+    export function unpackRGB(rgb: number): MultiReturn<[number, number, number]>;
     /**
      * Converts the given color to a paint/blit hex character (0-9, a-f). (CC:T 1.94+)
      *
@@ -223,9 +223,8 @@ declare module "colours" {
      * Separates a hexadecimal RGB colour into its three constituent channels. (CC:T)
      *
      * @param rgb - The RGB hex value to unpack.
-     * @tupleReturn
     */
-    export function unpackRGB(rgb: number): [number, number, number];
+    export function unpackRGB(rgb: number): MultiReturn<[number, number, number]>;
     /**
      * Converts the given colour to a paint/blit hex character (0-9, a-f). (CC:T 1.94+)
      *
@@ -308,9 +307,8 @@ declare module "commands" {
      * Executes a command string synchronously.
      *
      * @param command - The command string to run
-     * @tupleReturn
     */
-    export function exec(command: string): [boolean, Table];
+    export function exec(command: string): MultiReturn<[boolean, Table]>;
     /**
      * Executes a command string asynchronously.
      *
@@ -325,9 +323,8 @@ declare module "commands" {
     /**
      * Returns the world position of the computer.
      *
-     * @tupleReturn
     */
-    export function getBlockPosition(): [number, number, number];
+    export function getBlockPosition(): MultiReturn<[number, number, number]>;
     /**
      * Returns information about the block at a position.
      *
@@ -564,9 +561,8 @@ declare module "gps" {
      *
      * @param timeout - The maximim amount of time to wait for a response, defaults to 2
      * @param debug - Whether to print debug messages (optional)
-     * @tupleReturn
     */
-    export function locate(timeout?: number, debug?: boolean): ([number, number, number]) | null;
+    export function locate(timeout?: number, debug?: boolean): (MultiReturn<[number, number, number]>) | null;
 }
 /**
  * Provides functions for viewing help documents.
@@ -628,9 +624,8 @@ declare module "http" {
      * @param headers - The headers to set in the request (optional)
      * @param binary - Whether to send a binary request (optional) (CC 1.8+)
      * @param redirect - Whether to automatically redirect on HTTP 300 responses (optional) (CC 1.8+)
-     * @tupleReturn
     */
-    export function get(url: string, headers?: Table, binary?: boolean, redirect?: boolean): Table | [null, string, Table | null];
+    export function get(url: string, headers?: Table, binary?: boolean, redirect?: boolean): Table | MultiReturn<[null, string, Table | null]>;
     /**
      * Synchronously sends an HTTP POST request, and returns a file handle.
      *
@@ -639,16 +634,14 @@ declare module "http" {
      * @param headers - The headers to set in the request (optional)
      * @param binary - Whether to send a binary request (optional) (CC 1.8+)
      * @param redirect - Whether to automatically redirect on HTTP 300 responses (optional) (CC 1.8+)
-     * @tupleReturn
     */
-    export function post(url: string, postData: string, headers?: Table, binary?: boolean, redirect?: boolean): Table | [null, string, Table | null];
+    export function post(url: string, postData: string, headers?: Table, binary?: boolean, redirect?: boolean): Table | MultiReturn<[null, string, Table | null]>;
     /**
      * Checks if a URL is valid and in the whitelist.
      *
      * @param url - The URL to check
-     * @tupleReturn
     */
-    export function checkURL(url: string): [boolean, string | null];
+    export function checkURL(url: string): MultiReturn<[boolean, string | null]>;
     /**
      * Asynchronously hecks if a URL is valid and in the whitelist.
      *
@@ -660,9 +653,8 @@ declare module "http" {
      *
      * @param url - The URL to connect to
      * @param headers - Any headers to send in the HTTP request
-     * @tupleReturn
     */
-    export function websocket(url: string, headers?: Table): Table | [null, string];
+    export function websocket(url: string, headers?: Table): Table | MultiReturn<[null, string]>;
     /**
      * Asynchronously opens a websocket. (CC:T)
      *
@@ -706,9 +698,8 @@ declare module "io" {
      *
      * @param filename - The file to open
      * @param mode - The mode to open the file in (r/w/a) (optional)
-     * @tupleReturn
     */
-    export function open(filename: string, mode?: string): Table | ([null, string]);
+    export function open(filename: string, mode?: string): Table | (MultiReturn<[null, string]>);
     /**
      * Either opens a filename and sets the default output file handle, sets the defualt output handle to the handle passed in, or returns the current output handle.
      *
@@ -836,16 +827,14 @@ declare module "os" {
      * Waits for an event to occur.
      *
      * @param targetEvent - A filter specifying which event to wait for (optional)
-     * @tupleReturn
     */
-    export function pullEvent(targetEvent?: string): [string, any][];
+    export function pullEvent(targetEvent?: string): MultiReturn<[string, any]>[];
     /**
      * Waits for an event to occur (doesn't terminate when Ctrl-T is pressed).
      *
      * @param targetEvent - A filter specifying which event to wait for (optional)
-     * @tupleReturn
     */
-    export function pullEventRaw(targetEvent?: string): [string, any][];
+    export function pullEventRaw(targetEvent?: string): MultiReturn<[string, any]>[];
     /**
      * Adds an event to the event queue.
      *
@@ -1105,9 +1094,8 @@ declare module "rednet" {
      *
      * @param protocolFilter - The protocol to search for, requires timeout to be specified after
      * @param timeout - The maximim amount of time to wait for a message, defaults to 2
-     * @tupleReturn
     */
-    export function receive(protocolFilter?: string, timeout?: number): [number, any, number] | string;
+    export function receive(protocolFilter?: string, timeout?: number): MultiReturn<[number, any, number]> | string;
     /**
      * Checks if a modem is open.
      *
@@ -1513,9 +1501,8 @@ declare module "term" {
     /**
      * Returns the current position of the cursor.
      *
-     * @tupleReturn
     */
-    export function getCursorPos(): [number, number];
+    export function getCursorPos(): MultiReturn<[number, number]>;
     /**
      * Sets the current position of the cursor.
      *
@@ -1619,16 +1606,14 @@ declare module "term" {
      * Returns the original RGB values of the specified color. (CC:T 1.81+)
      *
      * @param color - The color to get the default for
-     * @tupleReturn
     */
-    export function nativePaletteColor(color: Color): [number, number, number];
+    export function nativePaletteColor(color: Color): MultiReturn<[number, number, number]>;
     /**
      * Returns the original RGB values of the specified colour. (CC:T 1.81+)
      *
      * @param colour - The colour to get the default for
-     * @tupleReturn
     */
-    export function nativePaletteColour(colour: Color): [number, number, number];
+    export function nativePaletteColour(colour: Color): MultiReturn<[number, number, number]>;
 }
 /**
  * Formats and manipulates strings.
@@ -1772,27 +1757,23 @@ declare module "turtle" {
     /**
      * Try to move the turtle forward.
      *
-     * @tupleReturn
     */
-    export function forward(): [boolean, string | null];
+    export function forward(): MultiReturn<[boolean, string | null]>;
     /**
      * Try to move the turtle backward.
      *
-     * @tupleReturn
     */
-    export function back(): [boolean, string | null];
+    export function back(): MultiReturn<[boolean, string | null]>;
     /**
      * Try to move the turtle up.
      *
-     * @tupleReturn
     */
-    export function up(): [boolean, string | null];
+    export function up(): MultiReturn<[boolean, string | null]>;
     /**
      * Try to move the turtle down.
      *
-     * @tupleReturn
     */
-    export function down(): [boolean, string | null];
+    export function down(): MultiReturn<[boolean, string | null]>;
     /**
      * Turn the turtle left.
      *
@@ -1846,64 +1827,55 @@ declare module "turtle" {
      * Breaks and sucks the block in front. With hoe: tills the dirt in front of it.
      *
      * @param toolSide - left/right (optional)
-     * @tupleReturn
     */
-    export function dig(toolSide?: string): [boolean, string | null];
+    export function dig(toolSide?: string): MultiReturn<[boolean, string | null]>;
     /**
      * Breaks and sucks the block above.
      *
      * @param toolSide - left/right (optional)
-     * @tupleReturn
     */
-    export function digUp(toolSide?: string): [boolean, string | null];
+    export function digUp(toolSide?: string): MultiReturn<[boolean, string | null]>;
     /**
      * Breaks and sucks the block below. With hoe: tills the dirt beneath the space below it.
      *
      * @param toolSide - left/right (optional)
-     * @tupleReturn
     */
-    export function digDown(toolSide?: string): [boolean, string | null];
+    export function digDown(toolSide?: string): MultiReturn<[boolean, string | null]>;
     /**
      * Places a block of the selected slot in front. Engrave signText on signs if provided. Collects water or lava if the currently selected slot is an empty bucket. (1.4+)
      *
      * @param signText - If you're placing a sign and signText is given, then the turtle places the sign putting the text of signText into it. Each line of the sign can be separated using newline (
 ) character (optional)
-     * @tupleReturn
     */
-    export function place(signText?: string): [boolean, string | null];
+    export function place(signText?: string): MultiReturn<[boolean, string | null]>;
     /**
      * Places a block of the selected slot above. Collects water or lava if the currently selected slot is an empty bucket.
      *
-     * @tupleReturn
     */
-    export function placeUp(): [boolean, string | null];
+    export function placeUp(): MultiReturn<[boolean, string | null]>;
     /**
      * Places a block of the selected slot below. Collects water or lava if the currently selected slot is an empty bucket.
      *
-     * @tupleReturn
     */
-    export function placeDown(): [boolean, string | null];
+    export function placeDown(): MultiReturn<[boolean, string | null]>;
     /**
      * Attacks in front of the turtle. (1.4+)
      *
      * @param toolSide - left/right (optional)
-     * @tupleReturn
     */
-    export function attack(toolSide?: string): [boolean, string | null];
+    export function attack(toolSide?: string): MultiReturn<[boolean, string | null]>;
     /**
      * Attacks above the turtle. (1.4+)
      *
      * @param toolSide - left/right (optional)
-     * @tupleReturn
     */
-    export function attackUp(toolSide?: string): [boolean, string | null];
+    export function attackUp(toolSide?: string): MultiReturn<[boolean, string | null]>;
     /**
      * Attacks under the turtle. (1.4+)
      *
      * @param toolSide - left/right (optional)
-     * @tupleReturn
     */
-    export function attackDown(toolSide?: string): [boolean, string | null];
+    export function attackDown(toolSide?: string): MultiReturn<[boolean, string | null]>;
     /**
      * Detects if there is a block in front. Does not detect mobs.
      *
@@ -1937,21 +1909,18 @@ declare module "turtle" {
     /**
      * Returns the ID string and metadata of the block in front of the Turtle. (1.64+)
      *
-     * @tupleReturn
     */
-    export function inspect(): [boolean, Table] | string;
+    export function inspect(): MultiReturn<[boolean, Table]> | string;
     /**
      * Returns the ID string and metadata of the block above the Turtle. (1.64+)
      *
-     * @tupleReturn
     */
-    export function inspectUp(): [boolean, Table] | string;
+    export function inspectUp(): MultiReturn<[boolean, Table]> | string;
     /**
      * Returns the ID string and metadata of the block below the Turtle. (1.64+)
      *
-     * @tupleReturn
     */
-    export function inspectDown(): [boolean, Table] | string;
+    export function inspectDown(): MultiReturn<[boolean, Table]> | string;
     /**
      * Compare the current selected slot and the given slot to see if the items are the same. Returns true if they are the same, false if not. (1.4+)
      *
@@ -1963,37 +1932,32 @@ declare module "turtle" {
      *
      * @param slotNum - 1 is top left, 16 (9 in 1.33 and earlier) is bottom right
      * @param quantity - Transfers [quantity] items from the selected slot to the specified slot (optional)
-     * @tupleReturn
     */
-    export function transferTo(slotNum: number, quantity?: number): [boolean, string | null];
+    export function transferTo(slotNum: number, quantity?: number): MultiReturn<[boolean, string | null]>;
     /**
      * Drops all items in the selected slot, or specified, drops [count] items.  /  [>= 1.4 only:] If there is a inventory on the side (i.e in front of the turtle) it will try to place into the inventory, returning false if the inventory is full.
      *
      * @param count - Drops [count] items (optional)
-     * @tupleReturn
     */
-    export function drop(count?: number): [boolean, string | null];
+    export function drop(count?: number): MultiReturn<[boolean, string | null]>;
     /**
      * Drops all items in the selected slot, or specified, drops [count] items.  /  [>= 1.4 only:] If there is a inventory on the side (i.e above the turtle) it will try to place into the inventory, returning false if the inventory is full. (1.4+)
      *
      * @param count - Drops [count] items (optional)
-     * @tupleReturn
     */
-    export function dropUp(count?: number): [boolean, string | null];
+    export function dropUp(count?: number): MultiReturn<[boolean, string | null]>;
     /**
      * Drops all items in the selected slot, or specified, drops [count] items.  /  [>= 1.4 only:] If there is a inventory on the side (i.e below the turtle) it will try to place into the inventory, returning false if the inventory is full. If above a furnace, will place item in the top slot. (1.4+)
      *
      * @param count - Drops [count] items (optional)
-     * @tupleReturn
     */
-    export function dropDown(count?: number): [boolean, string | null];
+    export function dropDown(count?: number): MultiReturn<[boolean, string | null]>;
     /**
      * Picks up an item stack of any number, from the ground or an inventory in front of the turtle, then places it in the selected slot. If the turtle can't pick up the item, the function returns false (1.4+). The [amount] parameter requires ComputerCraft 1.6 or later
      *
      * @param amount - The turtle will attempt to pick up at most the specified number of items (optional)
-     * @tupleReturn
     */
-    export function suck(amount?: number): [boolean, string | null];
+    export function suck(amount?: number): MultiReturn<[boolean, string | null]>;
     /**
      * Picks up an item stack of any number, from the ground or an inventory above the turtle, then places it in the selected slot. If the turtle can't pick up the item, the function returns false (1.4+). The [amount] parameter requires ComputerCraft 1.6 or later
      *
